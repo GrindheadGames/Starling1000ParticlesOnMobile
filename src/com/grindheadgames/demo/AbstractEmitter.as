@@ -18,15 +18,11 @@ package com.grindheadgames.demo
 			this._lifeSpan = lifeSpan;
 			super(texture,emissionRate,initialCapacity,maxCapacity,blendFactorSource,blendFactorDest);
 			
-			// this is a main part of this tutorial
-			// we initialize all our stars, and don't wait juggler
-			mNumParticles = totalParticles;
-			
 			var w:Number = Starling.current.stage.stageWidth;
 			
 			for (var i:int = 0; i < totalParticles; ++i) {
 				// get every particle
-				var particle:AbstractParticle = mParticles[i] as AbstractParticle;
+				var particle:AbstractParticle = new AbstractParticle();
 				// initialize it
 				initParticle(particle);
 				var rand:Number = Math.random();
@@ -59,12 +55,12 @@ package com.grindheadgames.demo
 			// randomize size of star [1.0, 2.5]
 			particle.scale = Utils.randRange(.5,1);
 			// place star outsize of left bound
-			particle.x =-mTexture.width * 0.5 * particle.scale;
+			particle.x =-texture.width * 0.5 * particle.scale;
 			// randomize vertical placement of star
 			particle.y = st.stageHeight * Math.random();
 			// calculate speed, we need add speed*pasedTime to `x` on every advance
 			// in the end we should be outside of right bound
-			particle.speed = ((st.stageWidth + mTexture.width * particle.scale) - particle.x) / particle.totalTime;
+			particle.speed = ((st.stageWidth + texture.width * particle.scale) - particle.x) / particle.totalTime;
 		}
 		
 		/**
